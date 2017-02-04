@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    
+	<canvas id="memeditor" width="500" height="500"></canvas>
+	<br />
+	<input type="file" id="file"><br /><br />
+    <a id="download">Stáhnout obrázek</a>
+    <script src="lib/fabric.js"></script>
+	<script src="js/memeditor.js" charset="utf-8"></script>
+	
+	<script>
+	function downloadCanvas(link, canvasId, filename) {
+      link.href = document.getElementById(canvasId).toDataURL();
+      link.download = filename;
+    }
+    document.getElementById('download').addEventListener('click', function() {
+      downloadCanvas(this, 'memeditor', 'test.png');
+    }, false);
+	</script>
+		
+</body>
+</html>

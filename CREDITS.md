@@ -1,0 +1,1 @@
+Many thanks to authors of Fabric.js (https://github.com/kangax/fabric.js/graphs/contributors).
