@@ -1,6 +1,6 @@
 var canvas = new fabric.Canvas('memeditor', {preserveObjectStacking: true});
 
-var upText = new fabric.Textbox('Život je pro mě víc jak peníze', {
+var upText = new fabric.Textbox('Dvojklikem zde anebo níže,', {
     left: 10,
 	top: 10,
 	width: 480,
@@ -16,11 +16,12 @@ var upText = new fabric.Textbox('Život je pro mě víc jak peníze', {
     lockRotation : true,
     hasControls : false,
     hasBorders : false,
+    editable: true,
 	});
 canvas.add(upText);
 upText.moveTo(50);
 	
-var lowText = new fabric.Textbox('proto chci konec zbrojařského veletrhu IDET', {
+var lowText = new fabric.Textbox('můžete vložit vlastní text.', {
     originY : 'bottom',
     left: 10,
 	top: 500,
@@ -37,6 +38,7 @@ var lowText = new fabric.Textbox('proto chci konec zbrojařského veletrhu IDET'
     lockRotation : true,
     hasControls : false,
     hasBorders : false,
+    editable: true,
 	});
 canvas.add(lowText);
 lowText.moveTo(50);
