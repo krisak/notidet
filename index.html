@@ -6,6 +6,12 @@
 <body>
 	<canvas id="memeditor" width="500" height="500"></canvas>
 	</br></br>
+  Vrchni text:
+  <input type="text" id="uppertext" oninput="updateMeme()" value="Pro vložení vašeho textu a fotografie" autocomplete="off">
+  </br>
+  Spodni text:
+  <input type="text" id="lowertext" oninput="updateMeme()" value="prosím použijte formulář níže ↓" autocomplete="off">
+  </br></br>
   Vyberte obrázek: </br>
   <input type="file" id="file"></br></br>
 	
@@ -23,6 +29,9 @@
     document.getElementById('download').addEventListener('click', function() {
       downloadCanvas(this, 'memeditor', 'test.png');
     }, false);
+
+    updateMeme();
+
 	</script>
 		
 </body>

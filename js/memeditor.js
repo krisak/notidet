@@ -1,6 +1,6 @@
 var canvas = new fabric.Canvas('memeditor', {preserveObjectStacking: true});
 
-var upText = new fabric.Textbox('Dvojklikem zde anebo níže,', {
+var upText = new fabric.Textbox('horni', {
     left: 10,
 	top: 10,
 	width: 480,
@@ -16,12 +16,13 @@ var upText = new fabric.Textbox('Dvojklikem zde anebo níže,', {
     lockRotation : true,
     hasControls : false,
     hasBorders : false,
-    editable: true,
+    hoverCursor : "default",
+    editable : false,
 	});
 canvas.add(upText);
 upText.moveTo(50);
 	
-var lowText = new fabric.Textbox('můžete vložit vlastní text.', {
+var lowText = new fabric.Textbox('spodni', {
     originY : 'bottom',
     left: 10,
 	top: 500,
@@ -38,7 +39,9 @@ var lowText = new fabric.Textbox('můžete vložit vlastní text.', {
     lockRotation : true,
     hasControls : false,
     hasBorders : false,
-    editable: true,
+    hoverCursor : "default",
+    editable: false,
+
 	});
 canvas.add(lowText);
 lowText.moveTo(50);
@@ -59,3 +62,9 @@ document.getElementById('file').addEventListener("change", function (e) {
     };
     reader.readAsDataURL(file);
 });
+
+function updateMeme(){
+    upText.setText(document.getElementById("uppertext").value);
+    lowText.setText(document.getElementById("lowertext").value);
+    canvas.renderAll();
+}
