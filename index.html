@@ -5,9 +5,10 @@
   <title>Warfie</title>
 
   <script src="lib/easeljs-0.8.2.combined.js"></script>
+  <script type="text/javascript" src="lib/webcam.js"></script>
   
   <style>
-  #videoElement, #result, #layer1, #layer2, #layer3, #layer4, #layer5 {
+  #mycamera, #camrender, #result, #layer1, #layer2, #layer3, #layer4, #layer5 {
     position: fixed;
   }
 
@@ -59,13 +60,14 @@
 </head>
 
 <body>
-  <canvas id="result" width="640" height="480"></canvas>
-  <video id="videoElement" autoplay="true" width="640" height="480"></video>
-  <canvas id="layer1" width="640" height="480"></canvas>
-  <canvas id="layer2" width="640" height="480"></canvas>
-  <canvas id="layer3" width="640" height="480"></canvas>
-  <canvas id="layer4" width="640" height="480"></canvas>
-  <canvas id="layer5" width="640" height="480"></canvas>
+  <canvas id="result" width="480" height="480"></canvas>
+  <canvas id="camrender" width="640" height="640" style="background-color:#0000FF"></canvas>
+  <div id="mycamera"></div>
+  <canvas id="layer1" width="480" height="480"></canvas>
+  <canvas id="layer2" width="480" height="480"></canvas>
+  <canvas id="layer3" width="480" height="480"></canvas>
+  <canvas id="layer4" width="480" height="480"></canvas>
+  <canvas id="layer5" width="480" height="480"></canvas>
   <a id="download" href="">Download</a>
 
   
@@ -75,22 +77,25 @@
       initialize();
     };
 
-    var video = document.querySelector("#videoElement");
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-    
-    if (navigator.getUserMedia) {       
-        navigator.getUserMedia({video: true}, handleVideo, videoError);
-    }
-    
-    function handleVideo(stream) {
-        video.src = window.URL.createObjectURL(stream);
-    }
-    
-    function videoError(e) {
-        // do something
-    }
-
-
+    Webcam.set({
+			// live preview size
+			width: 640,
+			height: 480,
+			
+			// device capture size
+			dest_width: 640,
+		  dest_height: 480,
+			
+			// final cropped size
+			crop_width: 480,
+			crop_height: 480,
+			
+			// format and quality
+			image_format: 'jpeg',
+			jpeg_quality: 2
+		});
+		
+		Webcam.attach( '#mycamera' );
 
 
 	  function downloadCanvas(link, canvasId, filename) {
@@ -99,7 +104,8 @@
       }
     document.getElementById('download').addEventListener('click', function() {
       var context = result.getContext('2d');
-      context.drawImage(videoElement, 0, 0, 640, 480);
+      Webcam.snap( function() {}, camrender );
+      context.drawImage(camrender, 0, 0);
       context.drawImage(layer1, 0, 0);
       context.drawImage(layer2, 0, 0);
       context.drawImage(layer3, 0, 0);
