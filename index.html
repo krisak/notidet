@@ -77,26 +77,34 @@
       initialize();
     };
 
-    Webcam.set({
-			// live preview size
-			width: 480,
-			height: 480,
-			
-			// device capture size
-			dest_width: 640,
-		  dest_height: 480,
-			
-			// final cropped size
-			crop_width: 480,
-			crop_height: 480,
-			
-			// format and quality
-			image_format: 'jpeg',
-			jpeg_quality: 2
-		});
-		
-		Webcam.attach( '#mycamera' );
+var attachWebcam = function() {
+  var width = 640;
+  var height = 480;
 
+  if(screen.width < screen.height) {
+    width = 480;
+    height = 640;
+  }
+
+  Webcam.set({
+    width: width,
+    height: height,
+    dest_width: width,
+    dest_height: height,
+    crop_width: 480,
+    crop_height: 480,
+    image_format: 'jpeg',
+		jpeg_quality: 2
+  });
+  Webcam.attach('#mycamera');
+};
+
+  window.addEventListener('orientationchange', function() {
+    Webcam.reset();
+    attachWebcam();
+  });
+
+attachWebcam();
 
 	  function downloadCanvas(link, canvasId, filename) {
       link.href = document.getElementById(canvasId).toDataURL();
