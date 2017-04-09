@@ -10,8 +10,6 @@
   <style>
   #mycamera, #camrender, #result, #layer1, #layer2, #layer3, #layer4, #layer5 {
     position: fixed;
-    max-width: 800px;
-    max-height: 600px;
   }
 
   #download {
@@ -82,8 +80,8 @@
 var attachWebcam = function() {
   var width = 800;
   var height = 600;
-  //var dest_width = 64;
-  //var dest_height = 48;
+  var dest_width = 640;
+  var dest_height = 480;
 
   if(screen.width < screen.height) {
     x = width;
@@ -97,8 +95,8 @@ var attachWebcam = function() {
   Webcam.set({
     width: width,
     height: height,
-    //dest_width: width,
-    //dest_height: height,
+    dest_width: dest_width,
+    dest_height: dest_height,
     //crop_width: 200,
     //crop_height: 200,
     image_format: 'jpeg',
