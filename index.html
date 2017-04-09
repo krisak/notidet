@@ -10,11 +10,13 @@
   <style>
   #mycamera, #camrender, #result, #layer1, #layer2, #layer3, #layer4, #layer5 {
     position: fixed;
+    max-width: 800px;
+    max-height: 600px;
   }
 
   #download {
     margin-left: 50px;
-    margin-top: 550px;
+    margin-top: 750px;
     position: absolute;
   }
   </style>
@@ -60,14 +62,14 @@
 </head>
 
 <body>
-  <canvas id="result" width="480" height="480"></canvas>
-  <canvas id="camrender" width="480" height="480" style="background-color:#0000FF"></canvas>
-  <div id="mycamera"></div>
-  <canvas id="layer1" width="480" height="480"></canvas>
-  <canvas id="layer2" width="480" height="480"></canvas>
-  <canvas id="layer3" width="480" height="480"></canvas>
-  <canvas id="layer4" width="480" height="480"></canvas>
-  <canvas id="layer5" width="480" height="480"></canvas>
+  <canvas id="result" width="800" height="600"></canvas>
+  <canvas id="camrender" width="800" height="600" style="background-color:#0000FF"></canvas>
+  <div id="mycamera" width="800" height="600"></div>
+  <canvas id="layer1" width="800" height="600"></canvas>
+  <canvas id="layer2" width="800" height="600"></canvas>
+  <canvas id="layer3" width="800" height="600"></canvas>
+  <canvas id="layer4" width="800" height="600"></canvas>
+  <canvas id="layer5" width="800" height="600"></canvas>
   <a id="download" href="">Download</a>
 
   
@@ -78,23 +80,29 @@
     };
 
 var attachWebcam = function() {
-  var width = 640;
-  var height = 480;
+  var width = 800;
+  var height = 600;
+  //var dest_width = 64;
+  //var dest_height = 48;
 
   if(screen.width < screen.height) {
-    width = 480;
-    height = 640;
+    x = width;
+    width = height;
+    height = width;
+    y = dest_width;
+    dest_width = dest_height;
+    dest_height = y;
   }
 
   Webcam.set({
     width: width,
     height: height,
-    dest_width: width,
-    dest_height: height,
-    crop_width: 480,
-    crop_height: 480,
+    //dest_width: width,
+    //dest_height: height,
+    //crop_width: 200,
+    //crop_height: 200,
     image_format: 'jpeg',
-		jpeg_quality: 2
+		jpeg_quality: 90
   });
   Webcam.attach('#mycamera');
 };
@@ -104,7 +112,9 @@ var attachWebcam = function() {
     attachWebcam();
   });
 
+
 attachWebcam();
+
 
 	  function downloadCanvas(link, canvasId, filename) {
       link.href = document.getElementById(canvasId).toDataURL();
