@@ -78,8 +78,8 @@
     };
 
 var attachWebcam = function() {
-  var width = 800;
-  var height = 600;
+  var width = 640;
+  var height = 480;
   var dest_width = 640;
   var dest_height = 480;
 
@@ -97,8 +97,8 @@ var attachWebcam = function() {
     height: height,
     dest_width: dest_width,
     dest_height: dest_height,
-    //crop_width: 200,
-    //crop_height: 200,
+    crop_width: 800,
+    crop_height: 600,
     image_format: 'jpeg',
 		jpeg_quality: 90
   });
