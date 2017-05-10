@@ -119,7 +119,8 @@ PIXI.loader.add('fence', 'pics/fence.png')
     app.ticker.add(function() {
          // each frame we spin the bunny around a bit
          warstate.position.x = warstate.position.x + 1;
-         smoke.position.x = smoke.position.x + 0.2;
+         smoke.position.x += 0.2;
+         smoke.rotation += 0.001;
 
     });
 });
