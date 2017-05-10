@@ -5,8 +5,11 @@
   <title>Warfie</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js"></script>
+  <!--<script type="text/javascript" src="lib/pixis.js"></script>-->
 <script src="https://unpkg.com/jquery"></script>
-  <script type="text/javascript" src="lib/webcam.js"></script>
+  <script type="text/javascript" src="lib/tools.js"></script>
+  <script type="text/javascript" src="lib/webcamz.js"></script>
+  <script type="text/javascript" src="lib/color.js"></script>
   
   <style>
 
@@ -20,10 +23,13 @@ body, html {
 }
   #canvasholder {
     position: relative;
-    width: 80%;
-    margin-left: 10%;
+    width: 100%;
+    /*margin-left: 10%;*/
     margin-top: 40px;
-    min-height: 600px;
+
+    /*Výška musí být nastavená!!!*/
+    height: 600px;
+   height: 50vw;
     z-index: 5;
   }
   #mycamera {
@@ -37,178 +43,253 @@ body, html {
 </head>
 
 <body>
-  <a id="download" href="">Download</a>
-  <div id="canvasholder">
+  <a id="dl" download="Stopidet.png" style="color: blue;">Download Canvas</a>
+    <div id="canvasholder">
+
+  </div>
+  <!--<div id="canvasholder">
       <div id="mycamera" width="800" height="600"></div>
     <div id="pixiholder"></div>
-  </div>
+  </div>-->
 
-  <canvas id="result" width="800" height="600"></canvas>
+  <!--<canvas id="result" width="800" height="600"></canvas>-->
 
 
 
   
   <script>
 
-var canvasholder = document.getElementById('canvasholder');
-var pixiholder = document.getElementById('pixiholder');
+// var canvasholder = document.getElementById('canvasholder');
+// var pixiholder = document.getElementById('pixiholder');
 
-var app = new PIXI.Application(canvasholder.offsetWidth, canvasholder.offsetHeight, {transparent: true, preserveDrawingBuffer:true});
+// var app = new PIXI.Application(canvasholder.offsetWidth, canvasholder.offsetHeight, {transparent: true, preserveDrawingBuffer:true});
 
-var container = new PIXI.Container();
-app.stage.addChild(container);
+// var container = new PIXI.Container();
+// app.stage.addChild(container);
 
-// The application will create a canvas element for you that you
-// can then insert into the DOM.
-pixiholder.appendChild(app.view);
+// // The application will create a canvas element for you that you
+// // can then insert into the DOM.
+// pixiholder.appendChild(app.view);
 
-// load the texture we need
+// // load the texture we need
+// PIXI.loader.add('fence', 'pics/fence.png')
+// .add('stopidet', 'pics/STOPIDET.png')
+// .add('warstate', 'pics/warstate.png')
+// .add('disp', 'pics/disp.jpg')
+// .add('smoke', 'pics/smoke.png')
+
+// .load(function(loader, resources) {
+
+//     // This creates a texture from a 'fence.png' image.
+//     var fence = new PIXI.Sprite(resources.fence.texture);
+//     var stopidet = new PIXI.Sprite(resources.stopidet.texture);
+//     var warstate = new PIXI.Sprite(resources.warstate.texture);
+//     var smoke = new PIXI.Sprite(resources.smoke.texture);
+//     var disp = new PIXI.Sprite(resources.disp.texture);
+
+
+
+
+//     smoke.anchor.x = 0.5;
+//     smoke.anchor.y = 0.5;
+//     smoke.scale.x = 3;
+//     smoke.scale.y = 3;
+
+
+//     // Setup the position of the fence
+//     fence.x = app.renderer.width / 2;
+//     fence.y = app.renderer.height / 2;
+
+//     // Rotate around the center
+//     fence.anchor.x = 0.5;
+//     fence.anchor.y = 0.5;
+//     console.log(app.height);
+//     warstate.position.y = container.height; 
+
+
+//     smoke.blendMode = PIXI.BLEND_MODES.SCREEN;
+//     // Add the fence to the scene we are building.
+//     app.stage.addChild(fence);
+//     // app.stage.addChild(stopidet);
+//     app.stage.addChild(warstate);
+//     app.stage.addChild(smoke);
+
+//     // Listen for frame updates
+//     app.ticker.add(function() {
+//          // each frame we spin the bunny around a bit
+//          warstate.position.x = warstate.position.x + 1;
+//          smoke.position.x += 0.2;
+//          smoke.rotation += 0.001;
+
+//     });
+// });
+function dlCanvas() {
+    var dt = document.querySelector('canvas').toDataURL('image/png');
+    this.href = dt;
+};
+dl.addEventListener('click', dlCanvas, false);
+
+var stopstop = {};
+stopstop.imagesReady = false;
+
+stopstop.setupStatic = function() {
+
+  stopstop.smoke.anchor.x = 0.5;
+  stopstop.smoke.anchor.y = 0.5;
+  stopstop.smoke.scale.x = 3;
+  stopstop.smoke.scale.y = 3;
+  // stopstop.position.x = 0;
+
+
+    // Setup the position of the fence
+    stopstop.fence.x = stopstop.w / 2;
+    stopstop.fence.width = stopstop.w;
+    stopstop.fence.y = stopstop.h / 2;
+
+
+};
+
+
 PIXI.loader.add('fence', 'pics/fence.png')
 .add('stopidet', 'pics/STOPIDET.png')
 .add('warstate', 'pics/warstate.png')
 .add('disp', 'pics/disp.jpg')
 .add('smoke', 'pics/smoke.png')
-
 .load(function(loader, resources) {
 
     // This creates a texture from a 'fence.png' image.
-    var fence = new PIXI.Sprite(resources.fence.texture);
-    var stopidet = new PIXI.Sprite(resources.stopidet.texture);
-    var warstate = new PIXI.Sprite(resources.warstate.texture);
-    var smoke = new PIXI.Sprite(resources.smoke.texture);
-    var disp = new PIXI.Sprite(resources.disp.texture);
+    stopstop.fence = new PIXI.Sprite(resources.fence.texture);
+    stopstop.stopidet = new PIXI.Sprite(resources.stopidet.texture);
+    stopstop.warstate = new PIXI.Sprite(resources.warstate.texture);
+    stopstop.smoke = new PIXI.Sprite(resources.smoke.texture);
+    stopstop.disp = new PIXI.Sprite(resources.disp.texture);
 
 
-
-// var displacementFilter = new PIXI.filters.DisplacementFilter(disp);
-
-// app.stage.addChild(disp);
-
-// container.filters = [displacementFilter];
-
-// displacementFilter.scale.x = 110;
-// displacementFilter.scale.y = 110;
-
-
-
-    smoke.anchor.x = 0.5;
-    smoke.anchor.y = 0.5;
-    smoke.scale.x = 3;
-    smoke.scale.y = 3;
-
-
-    // Setup the position of the fence
-    fence.x = app.renderer.width / 2;
-    fence.y = app.renderer.height / 2;
+    stopstop.setupStatic();
 
     // Rotate around the center
-    fence.anchor.x = 0.5;
-    fence.anchor.y = 0.5;
-    console.log(app.height);
-    warstate.position.y = container.height; 
+    stopstop.fence.anchor.x = 0.5;
+    stopstop.fence.anchor.y = 0.5;
+    stopstop.warstate.position.y = stopstop.h; 
 
 
-    smoke.blendMode = PIXI.BLEND_MODES.SCREEN;
-    // Add the fence to the scene we are building.
-    app.stage.addChild(fence);
-    // app.stage.addChild(stopidet);
-    app.stage.addChild(warstate);
-    app.stage.addChild(smoke);
+    stopstop.smoke.blendMode = PIXI.BLEND_MODES.SCREEN;
+    // // Add the fence to the scene we are building.
+    stage.addChild(stopstop.fence);
+    // stage.addChild(stopstop.stopidet);
+    stage.addChild(stopstop.warstate);
+    stage.addChild(stopstop.smoke);
 
-    // Listen for frame updates
-    app.ticker.add(function() {
-         // each frame we spin the bunny around a bit
-         warstate.position.x = warstate.position.x + 1;
-         smoke.position.x += 0.2;
-         smoke.rotation += 0.001;
+    // // Listen for frame updates
+    // app.ticker.add(function() {
+    //      // each frame we spin the bunny around a bit
+    //      warstate.position.x = warstate.position.x + 1;
+    //      smoke.position.x += 0.2;
+    //      smoke.rotation += 0.001;
 
-    });
-});
+    // });
+    stopstop.imagesReady = true;
 
-// var stage = new PIXI.Container(),
-//     renderer = PIXI.autoDetectRenderer(256, 256);
-// canvasholder.appendChild(renderer.view);
-
-// // //Use Pixi's built-in `loader` object to load an image
-// // PIXI.loader
-// //   .add("images/cat.png")
-// //   .load(setup);
-
-// // //This `setup` function will run when the image has loaded
-// // function setup() {
-
-// //   //Create the `cat` sprite from the texture
-// //   var cat = new PIXI.Sprite(
-// //     PIXI.loader.resources["pics/fence.png"].texture
-// //   );
-
-// //   //Add the cat to the stage
-// //   stage.addChild(cat);
-  
-// //   //Render the stage   
-// //   renderer.render(stage);
-// // }
-
-// var texture = PIXI.Texture.fromImage('pics/fence.png');
-
-
-
-var attachWebcam = function() {
-
-  Webcam.set({
-    width: canvasholder.offsetWidth,
-    height: canvasholder.offsetHeight,
-    dest_width: canvasholder.offsetWidth,
-    dest_height: canvasholder.offsetHeight,
-    crop_width: canvasholder.offsetWidth,
-    crop_height: canvasholder.offsetHeight,
-    image_format: 'jpeg',
-		jpeg_quality: 90
-  });
-  Webcam.attach('#mycamera');
-};
-
-  window.addEventListener('orientationchange', function() {
-    Webcam.reset();
-    attachWebcam();
-  });
-
-
-attachWebcam();
-
-
-var canvas = $('canvas')[0];
-var context = canvas.getContext('2d');
-$('button').click(function() {    
-  var data = renderer.view.toDataURL();    
-  //tried var data = canvas.toDataURL();    
-  
-  $('img').attr('src', data);
 
 });
 
 
+var canvasholder = document.getElementById('canvasholder');
+tools.mixin(tools, this);
+// var w = canvasholder.offsetWidth;
+// var h = canvasholder.offsetHeight;
+stopstop.w = canvasholder.offsetWidth;
+stopstop.h = canvasholder.offsetHeight;
+var out = new Stage(stopstop.w, stopstop.h, false).out;
+
+var webcam = new Webcam();
+webcam.onError.add(function(){
+  console.log('webcam inited');  
+  webcam.init()
+});//lol
+webcam.onReady.add(onWebcam);
+webcam.init();
+
+
+var stage = new PIXI.Stage(0x66FF99);
+var renderer = PIXI.autoDetectRenderer(stopstop.w, stopstop.h,{ preserveDrawingBuffer:true });
+
+
+var texture = PIXI.Texture.fromCanvas(out.canvas);
+var img = new PIXI.Sprite(texture);
+stage.addChild(img);
 
 
 
-	  function downloadCanvas(link, canvasId, filename) {
-      link.href = document.getElementById(canvasId).toDataURL();
-      link.download = filename;
-    }
-    
-    document.getElementById('download').addEventListener('click', function() {
-      var context = result.getContext('2d');
-      Webcam.snap( function() {}, camrender );
-    //   Webcam.snap( function(data_uri, canvas, context) {
-    // // copy image to my own canvas
-    //   myContext.drawImage( context, 0, 0 );
-    //   } );
+var loop = new Loop(update, this, false);
+
+var time = 0;
+
+function onWebcam()
+{
+  console.log('onwebcam'); 
+	loop.play();
+	var w = webcam.video.width;
+	var h = webcam.video.height;
+	out.setTransform(-1, 0, 0, 1, w, 0);
 
 
-      context.drawImage(camrender, 0, 0);
-      // context.drawImage(layer1, 0, 0);
-      downloadCanvas(this, 'result', 'test.png');
-      }, false);
+	canvasholder.appendChild(renderer.view);
+
+	window.onresize = onResize;
+	onResize();
+}
+
+function update()
+{
+    // console.log('update'); 
+	out.drawImage(webcam.video, 0, 0);
+
+  if(stopstop.imagesReady) {
+         stopstop.warstate.position.x += 1;
+         stopstop.smoke.position.x += 0.2;
+         stopstop.smoke.rotation += 0.0005;
+  }
+    //updates webcam feed to stage 
+    img.texture.update();
+    renderer.render(stage);
+}
+
+function onResize()
+{
+	// var w = window.innerWidth || document.body.clientWidth;
+	// var h = window.innerHeight || document.body.clientHeight;
+
+	var w = canvasholder.offsetWidth;
+	stopstop.w = canvasholder.offsetWidth;
+	stopstop.h = canvasholder.offsetHeight;
+	var h = canvasholder.offsetHeight;
+	renderer.resize(w, h);
+
+	var ww = webcam.video.width;
+	var wh = webcam.video.height;
+
+	var scale = 1;
+	var ratio = ww / wh;
+	if(ratio < w / h) scale = w / ww;
+	else scale = h / wh;
+	img.scale.x = img.scale.y = scale;
+	img.position.x = 0.5 * (w - scale * ww);
+	img.position.y = 0.5 * (h - scale * wh);
+    stopstop.fence.x = stopstop.w / 2;
+    stopstop.fence.width = stopstop.w;
+    stopstop.fence.y = stopstop.h / 2;
+
+}
+
+
+
+
+
+
+
+
+
   </script>
 
 </body>
