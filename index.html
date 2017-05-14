@@ -61,53 +61,87 @@ dl.addEventListener('click', dlCanvas, false);
 var stopstop = {};
 stopstop.imagesReady = false;
 
-stopstop.setupStatic = function() {
-
-  stopstop.smoke.anchor.x = 0.5;
-  stopstop.smoke.anchor.y = 0.5;
-  stopstop.smoke.scale.x = 3;
-  stopstop.smoke.scale.y = 3;
-  // stopstop.position.x = 0;
+stopstop.resizeStatic = function() {
 
 
-    // Setup the position of the fence
-    stopstop.fence.x = stopstop.w / 2;
-    stopstop.fence.width = stopstop.w;
-    stopstop.fence.y = stopstop.h / 2;
+    stopstop.map.position.x = renderer.width / 2;
+    stopstop.map.position.y = renderer.height / 2;
 
+    stopstop.red.width = renderer.width;
+    stopstop.red.position.y = renderer.height;
+    stopstop.red.position.x = renderer.width / 2;
+};
 
+stopstop.resizeText = function(){
+
+    stopstop.warstate.position.y = renderer.height*0.85;
+    stopstop.stopidet.position.y = renderer.height;
 };
 
 
-PIXI.loader.add('fence', 'pics/fence.png')
+PIXI.loader.add('map', 'pics/mapa.png')
+.add('red', 'pics/red.png')
+.add('black', 'pics/cerne.png')
 .add('stopidet', 'pics/STOPIDET.png')
 .add('warstate', 'pics/warstate.png')
 .add('disp', 'pics/disp.jpg')
-.add('smoke', 'pics/smoke.png')
+.add('smoke1', 'pics/cloud1.png')
+.add('smoke2', 'pics/cloud2.png')
 .load(function(loader, resources) {
 
     // This creates a texture from a 'fence.png' image.
-    stopstop.fence = new PIXI.Sprite(resources.fence.texture);
+    stopstop.red = new PIXI.Sprite(resources.red.texture);
+    stopstop.black = new PIXI.Sprite(resources.black.texture);
+    stopstop.map = new PIXI.Sprite(resources.map.texture);
     stopstop.stopidet = new PIXI.Sprite(resources.stopidet.texture);
     stopstop.warstate = new PIXI.Sprite(resources.warstate.texture);
-    stopstop.smoke = new PIXI.Sprite(resources.smoke.texture);
+    stopstop.smoke1 = new PIXI.Sprite(resources.smoke1.texture);
+    stopstop.smoke2 = new PIXI.Sprite(resources.smoke2.texture);
     stopstop.disp = new PIXI.Sprite(resources.disp.texture);
 
 
-    stopstop.setupStatic();
-
-    // Rotate around the center
-    stopstop.fence.anchor.x = 0.5;
-    stopstop.fence.anchor.y = 0.5;
-    stopstop.warstate.position.y = stopstop.h; 
 
 
-    stopstop.smoke.blendMode = PIXI.BLEND_MODES.SCREEN;
-    // // Add the fence to the scene we are building.
-    stage.addChild(stopstop.fence);
-    // stage.addChild(stopstop.stopidet);
+    stage.addChild(stopstop.map);
+    stage.addChild(stopstop.red);
     stage.addChild(stopstop.warstate);
-    stage.addChild(stopstop.smoke);
+    stage.addChild(stopstop.stopidet);
+    stage.addChild(stopstop.smoke1);
+    stage.addChild(stopstop.smoke2);
+
+
+
+    //setup static
+    // Rotate around the center
+
+    stopstop.warstate.anchor.set(0, 1);
+    stopstop.warstate.scale.set(0.3, 0.3);
+
+    stopstop.stopidet.anchor.set(0, 1);
+    stopstop.stopidet.scale.set(0.3, 0.3);
+
+    stopstop.stopidet.position.x = -stopstop.stopidet.width;
+    stopstop.warstate.position.x = -stopstop.warstate.width;
+
+
+
+    stopstop.map.anchor.set(0.5, 0.5);
+    stopstop.map.scale.set(0.4, 0.4);
+
+    stopstop.red.anchor.set(0.5, 1);
+
+    // stopstop.smoke.blendMode = PIXI.BLEND_MODES.NORMAL;
+
+
+
+    stopstop.resizeText();
+    stopstop.resizeStatic();
+    // stopstop.warstate.position.y = stopstop.h; 
+
+
+    // // Add the map to the scene we are building.
+    // stage.addChild(stopstop.map);
+    // stage.addChild(stopstop.stopidet);
 
     // // Listen for frame updates
     // app.ticker.add(function() {
@@ -175,10 +209,14 @@ function update()
 	out.drawImage(webcam.video, 0, 0);
 
   if(stopstop.imagesReady) {
-         stopstop.warstate.position.x += 1;
-         stopstop.smoke.position.x += 0.2;
-         stopstop.smoke.rotation += 0.0005;
+        stopstop.warstate.position.x -= 3;
+        stopstop.stopidet.position.x += 5;
+        //  stopstop.smoke.position.x += 0.2;
+        //  stopstop.smoke.rotation += 0.0005;
   }
+
+  if(stopstop.warstate.position.x < -stopstop.warstate.width) {stopstop.warstate.position.x = renderer.width}
+  if(stopstop.stopidet.position.x > renderer.width) {stopstop.stopidet.position.x = -stopstop.stopidet.width}
     //updates webcam feed to stage 
     img.texture.update();
     renderer.render(stage);
@@ -186,9 +224,6 @@ function update()
 
 function onResize()
 {
-	// var w = window.innerWidth || document.body.clientWidth;
-	// var h = window.innerHeight || document.body.clientHeight;
-
 	var w = canvasholder.offsetWidth;
 	stopstop.w = canvasholder.offsetWidth;
 	stopstop.h = canvasholder.offsetHeight;
@@ -205,10 +240,14 @@ function onResize()
 	img.scale.x = img.scale.y = scale;
 	img.position.x = 0.5 * (w - scale * ww);
 	img.position.y = 0.5 * (h - scale * wh);
-    stopstop.fence.x = stopstop.w / 2;
-    stopstop.fence.width = stopstop.w;
-    stopstop.fence.y = stopstop.h / 2;
 
+
+//resize texts
+
+
+
+  stopstop.resizeText();
+  stopstop.resizeStatic();
 }
 
 
