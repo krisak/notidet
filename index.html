@@ -59,6 +59,9 @@ function dlCanvas() {
 dl.addEventListener('click', dlCanvas, false);
 
 var sidet = {};
+
+var loop;
+
 sidet.imagesReady = false;
 
 sidet.resizeStatic = function() {
@@ -101,7 +104,11 @@ PIXI.loader.add('map', 'pics/mapa.png')
     sidet.smoke2 = new PIXI.Sprite(resources.smoke.texture);
     sidet.disp = new PIXI.Sprite(resources.disp.texture);
 
-
+  
+    //get webcam texture and add it as first - globals :(
+  var texture = PIXI.Texture.fromCanvas(out.canvas);
+  sidet.img = new PIXI.Sprite(texture);
+  stage.addChild(sidet.img);
 
 
     stage.addChild(sidet.map);
@@ -153,23 +160,10 @@ PIXI.loader.add('map', 'pics/mapa.png')
 
     sidet.resizeText();
     sidet.resizeStatic();
-    // sidet.warstate.position.y = sidet.h; 
-
-
-    // // Add the map to the scene we are building.
-    // stage.addChild(sidet.map);
-    // stage.addChild(sidet.stopidet);
-
-    // // Listen for frame updates
-    // app.ticker.add(function() {
-    //      // each frame we spin the bunny around a bit
-    //      warstate.position.x = warstate.position.x + 1;
-    //      smoke.position.x += 0.2;
-    //      smoke.rotation += 0.001;
-
-    // });
     sidet.imagesReady = true;
 
+    //start looping
+  loop = new Loop(update, this, false);
 
 });
 
@@ -195,13 +189,6 @@ var stage = new PIXI.Stage(0x66FF99);
 var renderer = PIXI.autoDetectRenderer(sidet.w, sidet.h,{ preserveDrawingBuffer:true });
 
 
-var texture = PIXI.Texture.fromCanvas(out.canvas);
-var img = new PIXI.Sprite(texture);
-stage.addChild(img);
-
-
-
-var loop = new Loop(update, this, false);
 
 var time = 0;
 
@@ -228,7 +215,7 @@ function update()
   if(sidet.imagesReady) {
         sidet.warstate.position.x -= 1;
         sidet.stopidet.position.x += 3;
-        sidet.black.position.x += 0.3;
+        sidet.black.position.x += 0.9;
 
          sidet.smoke1.position.x += sidet.move.smoke1;
          sidet.smoke1.rotation += 0.0001;
@@ -243,7 +230,7 @@ function update()
   if(sidet.smoke1.position.x > renderer.width) {sidet.black.position.x = -sidet.black.width}
 
     //updates webcam feed to stage 
-    img.texture.update();
+    sidet.img.texture.update();
     renderer.render(stage);
 }
 
@@ -262,9 +249,9 @@ function onResize()
 	var ratio = ww / wh;
 	if(ratio < w / h) scale = w / ww;
 	else scale = h / wh;
-	img.scale.x = img.scale.y = scale;
-	img.position.x = 0.5 * (w - scale * ww);
-	img.position.y = 0.5 * (h - scale * wh);
+	sidet.img.scale.x = sidet.img.scale.y = scale;
+	sidet.img.position.x = 0.5 * (w - scale * ww);
+	sidet.img.position.y = 0.5 * (h - scale * wh);
 
 
 //resize texts
