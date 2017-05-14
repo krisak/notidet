@@ -74,8 +74,9 @@ stopstop.resizeStatic = function() {
 
 stopstop.resizeText = function(){
 
-    stopstop.warstate.position.y = renderer.height*0.85;
+    stopstop.warstate.position.y = renderer.height*0.95;
     stopstop.stopidet.position.y = renderer.height;
+    stopstop.black.position.y = renderer.height;
 };
 
 
@@ -103,9 +104,11 @@ PIXI.loader.add('map', 'pics/mapa.png')
 
 
     stage.addChild(stopstop.map);
+    stage.addChild(stopstop.black);
     stage.addChild(stopstop.red);
     stage.addChild(stopstop.warstate);
     stage.addChild(stopstop.stopidet);
+    
     stage.addChild(stopstop.smoke1);
     stage.addChild(stopstop.smoke2);
 
@@ -120,8 +123,13 @@ PIXI.loader.add('map', 'pics/mapa.png')
     stopstop.stopidet.anchor.set(0, 1);
     stopstop.stopidet.scale.set(0.3, 0.3);
 
+    stopstop.black.anchor.set(0, 1);
+    stopstop.black.scale.set(0.7, 0.7);
+
+    stopstop.black.position.x = -stopstop.black.width;
     stopstop.stopidet.position.x = -stopstop.stopidet.width;
     stopstop.warstate.position.x = -stopstop.warstate.width;
+
 
 
 
@@ -211,12 +219,14 @@ function update()
   if(stopstop.imagesReady) {
         stopstop.warstate.position.x -= 3;
         stopstop.stopidet.position.x += 5;
+        stopstop.black.position.x += 0.3;
         //  stopstop.smoke.position.x += 0.2;
         //  stopstop.smoke.rotation += 0.0005;
   }
 
   if(stopstop.warstate.position.x < -stopstop.warstate.width) {stopstop.warstate.position.x = renderer.width}
   if(stopstop.stopidet.position.x > renderer.width) {stopstop.stopidet.position.x = -stopstop.stopidet.width}
+  if(stopstop.black.position.x > renderer.width) {stopstop.black.position.x = -stopstop.black.width}
     //updates webcam feed to stage 
     img.texture.update();
     renderer.render(stage);
