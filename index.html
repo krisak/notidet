@@ -47,82 +47,11 @@ body, html {
     <div id="canvasholder">
 
   </div>
-  <!--<div id="canvasholder">
-      <div id="mycamera" width="800" height="600"></div>
-    <div id="pixiholder"></div>
-  </div>-->
-
-  <!--<canvas id="result" width="800" height="600"></canvas>-->
-
 
 
   
   <script>
 
-// var canvasholder = document.getElementById('canvasholder');
-// var pixiholder = document.getElementById('pixiholder');
-
-// var app = new PIXI.Application(canvasholder.offsetWidth, canvasholder.offsetHeight, {transparent: true, preserveDrawingBuffer:true});
-
-// var container = new PIXI.Container();
-// app.stage.addChild(container);
-
-// // The application will create a canvas element for you that you
-// // can then insert into the DOM.
-// pixiholder.appendChild(app.view);
-
-// // load the texture we need
-// PIXI.loader.add('fence', 'pics/fence.png')
-// .add('stopidet', 'pics/STOPIDET.png')
-// .add('warstate', 'pics/warstate.png')
-// .add('disp', 'pics/disp.jpg')
-// .add('smoke', 'pics/smoke.png')
-
-// .load(function(loader, resources) {
-
-//     // This creates a texture from a 'fence.png' image.
-//     var fence = new PIXI.Sprite(resources.fence.texture);
-//     var stopidet = new PIXI.Sprite(resources.stopidet.texture);
-//     var warstate = new PIXI.Sprite(resources.warstate.texture);
-//     var smoke = new PIXI.Sprite(resources.smoke.texture);
-//     var disp = new PIXI.Sprite(resources.disp.texture);
-
-
-
-
-//     smoke.anchor.x = 0.5;
-//     smoke.anchor.y = 0.5;
-//     smoke.scale.x = 3;
-//     smoke.scale.y = 3;
-
-
-//     // Setup the position of the fence
-//     fence.x = app.renderer.width / 2;
-//     fence.y = app.renderer.height / 2;
-
-//     // Rotate around the center
-//     fence.anchor.x = 0.5;
-//     fence.anchor.y = 0.5;
-//     console.log(app.height);
-//     warstate.position.y = container.height; 
-
-
-//     smoke.blendMode = PIXI.BLEND_MODES.SCREEN;
-//     // Add the fence to the scene we are building.
-//     app.stage.addChild(fence);
-//     // app.stage.addChild(stopidet);
-//     app.stage.addChild(warstate);
-//     app.stage.addChild(smoke);
-
-//     // Listen for frame updates
-//     app.ticker.add(function() {
-//          // each frame we spin the bunny around a bit
-//          warstate.position.x = warstate.position.x + 1;
-//          smoke.position.x += 0.2;
-//          smoke.rotation += 0.001;
-
-//     });
-// });
 function dlCanvas() {
     var dt = document.querySelector('canvas').toDataURL('image/png');
     this.href = dt;
