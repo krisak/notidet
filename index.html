@@ -77,6 +77,8 @@ sidet.resizeText = function(){
     sidet.warstate.position.y = renderer.height*0.95;
     sidet.stopidet.position.y = renderer.height;
     sidet.black.position.y = renderer.height/2;
+    sidet.smoke1.position.y = 0;
+    sidet.smoke2.position.y = renderer.height;
 };
 
 
@@ -105,15 +107,23 @@ PIXI.loader.add('map', 'pics/mapa.png')
     stage.addChild(sidet.map);
     stage.addChild(sidet.black);
     stage.addChild(sidet.red);
+    stage.addChild(sidet.smoke2);
     stage.addChild(sidet.warstate);
     stage.addChild(sidet.stopidet);
     
     stage.addChild(sidet.smoke1);
-    stage.addChild(sidet.smoke2);
+    sidet.move = {};
 
 
+    sidet.smoke1.anchor.set(0.5, 0.5);
+    sidet.smoke1.scale.set(3.5,3.5);
+    sidet.move.smoke1 = 0.1; 
 
-    // sidet.smoke
+    sidet.smoke2.anchor.set(0.5, 0.5);
+    sidet.smoke2.scale.set(2,2);
+    sidet.smoke2.position.set(renderer.width, renderer.height);
+    sidet.move.smoke2 = -0.05; 
+
 
     sidet.warstate.anchor.set(0, 1);
     sidet.warstate.scale.set(0.3, 0.3);
@@ -136,7 +146,8 @@ PIXI.loader.add('map', 'pics/mapa.png')
 
     sidet.red.anchor.set(0.5, 1);
 
-    // sidet.smoke.blendMode = PIXI.BLEND_MODES.NORMAL;
+    sidet.smoke1.blendMode = PIXI.BLEND_MODES.SCREEN;
+    sidet.smoke2.blendMode = PIXI.BLEND_MODES.SCREEN;
 
 
 
@@ -215,16 +226,22 @@ function update()
 	out.drawImage(webcam.video, 0, 0);
 
   if(sidet.imagesReady) {
-        sidet.warstate.position.x -= 3;
-        sidet.stopidet.position.x += 5;
+        sidet.warstate.position.x -= 1;
+        sidet.stopidet.position.x += 3;
         sidet.black.position.x += 0.3;
-        //  sidet.smoke.position.x += 0.2;
-        //  sidet.smoke.rotation += 0.0005;
+
+         sidet.smoke1.position.x += sidet.move.smoke1;
+         sidet.smoke1.rotation += 0.0001;
+
+        sidet.smoke2.position.x += sidet.move.smoke2;
+        sidet.smoke2.rotation += 0.0001;
   }
 
   if(sidet.warstate.position.x < -sidet.warstate.width) {sidet.warstate.position.x = renderer.width}
   if(sidet.stopidet.position.x > renderer.width) {sidet.stopidet.position.x = -sidet.stopidet.width}
   if(sidet.black.position.x > renderer.width) {sidet.black.position.x = -sidet.black.width}
+  if(sidet.smoke1.position.x > renderer.width) {sidet.black.position.x = -sidet.black.width}
+
     //updates webcam feed to stage 
     img.texture.update();
     renderer.render(stage);
