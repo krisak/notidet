@@ -58,25 +58,25 @@ function dlCanvas() {
 };
 dl.addEventListener('click', dlCanvas, false);
 
-var stopstop = {};
-stopstop.imagesReady = false;
+var sidet = {};
+sidet.imagesReady = false;
 
-stopstop.resizeStatic = function() {
+sidet.resizeStatic = function() {
 
 
-    stopstop.map.position.x = renderer.width / 2;
-    stopstop.map.position.y = renderer.height / 2;
+    sidet.map.position.x = renderer.width / 2;
+    sidet.map.position.y = renderer.height / 2;
 
-    stopstop.red.width = renderer.width;
-    stopstop.red.position.y = renderer.height;
-    stopstop.red.position.x = renderer.width / 2;
+    sidet.red.width = renderer.width;
+    sidet.red.position.y = renderer.height;
+    sidet.red.position.x = renderer.width / 2;
 };
 
-stopstop.resizeText = function(){
+sidet.resizeText = function(){
 
-    stopstop.warstate.position.y = renderer.height*0.95;
-    stopstop.stopidet.position.y = renderer.height;
-    stopstop.black.position.y = renderer.height;
+    sidet.warstate.position.y = renderer.height*0.95;
+    sidet.stopidet.position.y = renderer.height;
+    sidet.black.position.y = renderer.height/2;
 };
 
 
@@ -86,70 +86,68 @@ PIXI.loader.add('map', 'pics/mapa.png')
 .add('stopidet', 'pics/STOPIDET.png')
 .add('warstate', 'pics/warstate.png')
 .add('disp', 'pics/disp.jpg')
-.add('smoke1', 'pics/cloud1.png')
-.add('smoke2', 'pics/cloud2.png')
+.add('smoke', 'pics/cloud1.png')
 .load(function(loader, resources) {
 
     // This creates a texture from a 'fence.png' image.
-    stopstop.red = new PIXI.Sprite(resources.red.texture);
-    stopstop.black = new PIXI.Sprite(resources.black.texture);
-    stopstop.map = new PIXI.Sprite(resources.map.texture);
-    stopstop.stopidet = new PIXI.Sprite(resources.stopidet.texture);
-    stopstop.warstate = new PIXI.Sprite(resources.warstate.texture);
-    stopstop.smoke1 = new PIXI.Sprite(resources.smoke1.texture);
-    stopstop.smoke2 = new PIXI.Sprite(resources.smoke2.texture);
-    stopstop.disp = new PIXI.Sprite(resources.disp.texture);
+    sidet.red = new PIXI.Sprite(resources.red.texture);
+    sidet.black = new PIXI.Sprite(resources.black.texture);
+    sidet.map = new PIXI.Sprite(resources.map.texture);
+    sidet.stopidet = new PIXI.Sprite(resources.stopidet.texture);
+    sidet.warstate = new PIXI.Sprite(resources.warstate.texture);
+    sidet.smoke1 = new PIXI.Sprite(resources.smoke.texture);
+    sidet.smoke2 = new PIXI.Sprite(resources.smoke.texture);
+    sidet.disp = new PIXI.Sprite(resources.disp.texture);
 
 
 
 
-    stage.addChild(stopstop.map);
-    stage.addChild(stopstop.black);
-    stage.addChild(stopstop.red);
-    stage.addChild(stopstop.warstate);
-    stage.addChild(stopstop.stopidet);
+    stage.addChild(sidet.map);
+    stage.addChild(sidet.black);
+    stage.addChild(sidet.red);
+    stage.addChild(sidet.warstate);
+    stage.addChild(sidet.stopidet);
     
-    stage.addChild(stopstop.smoke1);
-    stage.addChild(stopstop.smoke2);
+    stage.addChild(sidet.smoke1);
+    stage.addChild(sidet.smoke2);
 
 
 
-    //setup static
-    // Rotate around the center
+    // sidet.smoke
 
-    stopstop.warstate.anchor.set(0, 1);
-    stopstop.warstate.scale.set(0.3, 0.3);
+    sidet.warstate.anchor.set(0, 1);
+    sidet.warstate.scale.set(0.3, 0.3);
 
-    stopstop.stopidet.anchor.set(0, 1);
-    stopstop.stopidet.scale.set(0.3, 0.3);
+    sidet.stopidet.anchor.set(0, 1);
+    sidet.stopidet.scale.set(0.3, 0.3);
 
-    stopstop.black.anchor.set(0, 1);
-    stopstop.black.scale.set(0.7, 0.7);
+    sidet.black.anchor.set(0, 0.5);
+    sidet.black.scale.set(0.7, 0.7);
 
-    stopstop.black.position.x = -stopstop.black.width;
-    stopstop.stopidet.position.x = -stopstop.stopidet.width;
-    stopstop.warstate.position.x = -stopstop.warstate.width;
-
+    sidet.black.position.x = -sidet.black.width;
+    sidet.stopidet.position.x = -sidet.stopidet.width;
+    sidet.warstate.position.x = -sidet.warstate.width;
 
 
 
-    stopstop.map.anchor.set(0.5, 0.5);
-    stopstop.map.scale.set(0.4, 0.4);
 
-    stopstop.red.anchor.set(0.5, 1);
+    sidet.map.anchor.set(0.5, 0.5);
+    sidet.map.scale.set(0.4, 0.4);
 
-    // stopstop.smoke.blendMode = PIXI.BLEND_MODES.NORMAL;
+    sidet.red.anchor.set(0.5, 1);
+
+    // sidet.smoke.blendMode = PIXI.BLEND_MODES.NORMAL;
 
 
 
-    stopstop.resizeText();
-    stopstop.resizeStatic();
-    // stopstop.warstate.position.y = stopstop.h; 
+    sidet.resizeText();
+    sidet.resizeStatic();
+    // sidet.warstate.position.y = sidet.h; 
 
 
     // // Add the map to the scene we are building.
-    // stage.addChild(stopstop.map);
-    // stage.addChild(stopstop.stopidet);
+    // stage.addChild(sidet.map);
+    // stage.addChild(sidet.stopidet);
 
     // // Listen for frame updates
     // app.ticker.add(function() {
@@ -159,7 +157,7 @@ PIXI.loader.add('map', 'pics/mapa.png')
     //      smoke.rotation += 0.001;
 
     // });
-    stopstop.imagesReady = true;
+    sidet.imagesReady = true;
 
 
 });
@@ -169,9 +167,9 @@ var canvasholder = document.getElementById('canvasholder');
 tools.mixin(tools, this);
 // var w = canvasholder.offsetWidth;
 // var h = canvasholder.offsetHeight;
-stopstop.w = canvasholder.offsetWidth;
-stopstop.h = canvasholder.offsetHeight;
-var out = new Stage(stopstop.w, stopstop.h, false).out;
+sidet.w = canvasholder.offsetWidth;
+sidet.h = canvasholder.offsetHeight;
+var out = new Stage(sidet.w, sidet.h, false).out;
 
 var webcam = new Webcam();
 webcam.onError.add(function(){
@@ -183,7 +181,7 @@ webcam.init();
 
 
 var stage = new PIXI.Stage(0x66FF99);
-var renderer = PIXI.autoDetectRenderer(stopstop.w, stopstop.h,{ preserveDrawingBuffer:true });
+var renderer = PIXI.autoDetectRenderer(sidet.w, sidet.h,{ preserveDrawingBuffer:true });
 
 
 var texture = PIXI.Texture.fromCanvas(out.canvas);
@@ -216,17 +214,17 @@ function update()
     // console.log('update'); 
 	out.drawImage(webcam.video, 0, 0);
 
-  if(stopstop.imagesReady) {
-        stopstop.warstate.position.x -= 3;
-        stopstop.stopidet.position.x += 5;
-        stopstop.black.position.x += 0.3;
-        //  stopstop.smoke.position.x += 0.2;
-        //  stopstop.smoke.rotation += 0.0005;
+  if(sidet.imagesReady) {
+        sidet.warstate.position.x -= 3;
+        sidet.stopidet.position.x += 5;
+        sidet.black.position.x += 0.3;
+        //  sidet.smoke.position.x += 0.2;
+        //  sidet.smoke.rotation += 0.0005;
   }
 
-  if(stopstop.warstate.position.x < -stopstop.warstate.width) {stopstop.warstate.position.x = renderer.width}
-  if(stopstop.stopidet.position.x > renderer.width) {stopstop.stopidet.position.x = -stopstop.stopidet.width}
-  if(stopstop.black.position.x > renderer.width) {stopstop.black.position.x = -stopstop.black.width}
+  if(sidet.warstate.position.x < -sidet.warstate.width) {sidet.warstate.position.x = renderer.width}
+  if(sidet.stopidet.position.x > renderer.width) {sidet.stopidet.position.x = -sidet.stopidet.width}
+  if(sidet.black.position.x > renderer.width) {sidet.black.position.x = -sidet.black.width}
     //updates webcam feed to stage 
     img.texture.update();
     renderer.render(stage);
@@ -235,8 +233,8 @@ function update()
 function onResize()
 {
 	var w = canvasholder.offsetWidth;
-	stopstop.w = canvasholder.offsetWidth;
-	stopstop.h = canvasholder.offsetHeight;
+	sidet.w = canvasholder.offsetWidth;
+	sidet.h = canvasholder.offsetHeight;
 	var h = canvasholder.offsetHeight;
 	renderer.resize(w, h);
 
@@ -256,8 +254,8 @@ function onResize()
 
 
 
-  stopstop.resizeText();
-  stopstop.resizeStatic();
+  sidet.resizeText();
+  sidet.resizeStatic();
 }
 
 
