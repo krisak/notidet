@@ -139,13 +139,15 @@ PIXI.loader.add('map', 'pics/mapa_mala.png')
     sidet.stopidet.scale.set(0.3, 0.3);
 
     sidet.black.anchor.set(0, 0.5);
-    sidet.black.scale.set(0.7, 0.7);
+    sidet.black.scale.set(1.5, 1.5);
 
-    sidet.black.position.x = -sidet.black.width;
-    sidet.stopidet.position.x = -sidet.stopidet.width;
-    sidet.warstate.position.x = -sidet.warstate.width;
+    // sidet.black.position.x = -sidet.black.width;
+    // sidet.stopidet.position.x = -sidet.stopidet.width;
+    // sidet.warstate.position.x = -sidet.warstate.width;
 
-
+    sidet.black.position.x =  -sidet.black.width/2;
+    sidet.stopidet.position.x = 0;
+    sidet.warstate.position.x = 0;
 
 
     sidet.map.anchor.set(0.5, 0.5);
@@ -214,8 +216,9 @@ function update()
 
   if(sidet.imagesReady) {
         sidet.warstate.position.x -= 1;
-        sidet.stopidet.position.x += 3;
-        sidet.black.position.x += 0.9;
+        sidet.stopidet.position.x += 1.3;
+        sidet.black.position.x += 3;
+        sidet.map.position.x -= 0.2;
 
          sidet.smoke1.position.x += sidet.move.smoke1;
          sidet.smoke1.rotation += 0.0001;
